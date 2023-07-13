@@ -1,5 +1,6 @@
 const multer = require('multer')
 const path = require('path')
+const fs = require('fs')
 
 const filestorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -12,18 +13,14 @@ const filestorage = multer.diskStorage({
 });
 const upload = multer({
   storage: filestorage,
-  fileFilter: (req, file, cb) => {
-    var allowedMimes = ['image/jpeg', 'image/jpg', 'image/png'];
-    if (allowedMimes.includes(file.mimetype)) {
-      cb(null, true);
-    } else {
-      cb({
-        success: false,
-        message: 'Invalid file type. Only jpg, png ,jpeg image files are allowed.'
-      }, false);
+  fileFilter: (req, file, cb)=> {
+    var ext = path.extname(file.originalname)
+    if (ext != '.mkv' && ext != '.mp4') {
+      return cb(new Error("only video allowed"))
     }
-    console.log("file.mimetype============>", file.mimetype)
+    cb(null, true)
   }
-});
+})
+
 
 module.exports = upload;
