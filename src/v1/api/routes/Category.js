@@ -14,8 +14,4 @@ router.post('/update',GlobalAuthClass.authenticate,CategoryController.update)
 
 router.post('/deleteData',GlobalAuthClass.authenticate,CategoryController.deleteData)
 
-
-
-
-
 module.exports = router;

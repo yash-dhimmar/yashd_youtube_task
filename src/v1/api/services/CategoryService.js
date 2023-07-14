@@ -8,6 +8,7 @@ class CategoryService {
         var category = await Category.create({
           title, description, userId: userId
         })
+        
         return resolve(category)
       } catch (error) {
         return reject(error)

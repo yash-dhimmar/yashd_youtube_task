@@ -11,6 +11,9 @@ router.post('/upload_video',GlobalAuthClass.authenticate,upload.single('video'),
 
 router.get('/user-get-video',GlobalAuthClass.authenticate,VideoController.getVideo)
 
+router.post('/video_delete',GlobalAuthClass.authenticate,VideoController.video_delete)
+
+router.post('/update_view',GlobalAuthClass.authenticate,VideoController.update_view)
 
 
 module.exports = router;

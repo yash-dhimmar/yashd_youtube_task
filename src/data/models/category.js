@@ -31,5 +31,6 @@ module.exports = (mongoose) => {
   });
 
   CategorySchema.plugin(uniqueValidator, { message: '{PATH} already exists.' })
+  
   return mongoose.model('Category',CategorySchema, 'category')
 };
