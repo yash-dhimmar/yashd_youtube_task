@@ -17,7 +17,7 @@ module.exports = (mongoose) => {
       required: true
     },
 
-  }, {
+  }, {   
     timestamps: true
   });
 

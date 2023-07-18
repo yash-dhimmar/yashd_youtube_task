@@ -59,6 +59,8 @@ module.exports = (mongoose) => {
 
 
     return  mongoose.model('User', UserSchema, 'users')
+
+
 };
 
 

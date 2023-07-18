@@ -34,7 +34,7 @@ if(process.env.DB_CONNECTION =='mongodb'){
         pool: {
             max: 1000,
             min: 0,
-            acquire: 60000,
+            acquire: 60000,   
             idle: 10000,
         },
     });

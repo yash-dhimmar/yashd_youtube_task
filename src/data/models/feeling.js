@@ -11,7 +11,7 @@ module.exports = (mongoose) => {
       type: String,
       enum: ['like', 'dislike','blank'],
       required: [true, 'Type is required either like or dislike']
-     
+           
     },
 
     videoId: {

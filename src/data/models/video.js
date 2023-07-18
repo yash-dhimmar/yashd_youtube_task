@@ -37,7 +37,7 @@ module.exports = (mongoose) => {
       enum: ['draft', 'private', 'public'],
       default: 'draft'
     },
-    categoryId: {
+    categoryId: {   
       type: mongoose.Schema.ObjectId,
       ref: 'Category',
     },
