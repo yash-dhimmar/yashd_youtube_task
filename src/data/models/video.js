@@ -8,7 +8,6 @@ function video(video) {
   return 'http://localhost:4000/uploads/' + video
 }
 
-
 module.exports = (mongoose) => {
   const VideoSchema = new Schema({
     title: {

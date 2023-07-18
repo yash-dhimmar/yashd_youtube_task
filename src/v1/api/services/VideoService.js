@@ -3,7 +3,7 @@ const path = require('path')
 
 class VideoService {
 
-  async upload_video(req, userId) {
+  async uploadVideo(req, userId) {
     return new Promise(async (resolve, reject) => {
       try {
         let {
@@ -41,7 +41,7 @@ class VideoService {
     })
   }
 
-  async video_delete(req, userId) {
+  async videoDelete(req, userId) {
     return new Promise(async (resolve, reject) => {
       try {
         let { videoId } = req.body
@@ -60,7 +60,7 @@ class VideoService {
       }
     })
   }
-  async update_view(req, userId) {
+  async updateView(req, userId) {
     return new Promise(async (resolve, reject) => {
       try {
         var video = Video

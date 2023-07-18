@@ -3,12 +3,12 @@ const VideoService = require('../services/VideoService')
 const jwt = require('jsonwebtoken')
 
 class VideoController {
-  async upload_video(req, res) {
+  async uploadVideo(req, res) {
     try {
       var token = req.headers.authorization
       var decodedData = jwt.verify(token, 'secretkey')
       var userId = decodedData.user[0]._id
-      var data = await VideoService.upload_video(req, userId)
+      var data = await VideoService.uploadVideo(req, userId)
       return ResponseHelper.success(data, 'video uploaded successfully',res)
     } catch (error) {
       return ResponseHelper.error(error, res)
@@ -26,24 +26,24 @@ class VideoController {
     }
   }
 
-  async video_delete(req, res) {
+  async videoDelete(req, res) {
     try {
       var token = req.headers.authorization
       var decodedData = jwt.verify(token, 'secretkey')
       var userId = decodedData.user[0]._id
-      var data = await VideoService.video_delete(req, userId)
+      var data = await VideoService.videoDelete(req, userId)
       return ResponseHelper.success(data, 'video deleted successfully',res)
     } catch (error) {
       return ResponseHelper.error(error, res)
     }
   }
 
-  async update_view(req, res) {
+  async updateView(req, res) {
     try {
       var token = req.headers.authorization
       var decodedData = jwt.verify(token, 'secretkey')
       var userId = decodedData.user[0]._id
-      var data = await VideoService.update_view(req, userId)
+      var data = await VideoService.updateView(req, userId)
       return ResponseHelper.success(data, 'view updated successfully',res)
     } catch (error) {
       console.log("error=========>>",error)
