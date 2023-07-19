@@ -6,10 +6,10 @@ const ResponseHelper = require('../../api/resources/response');
 class UserController {
   async create(req, res) {
     try {
-      var token= req.headers.authorization;
-      var decodedData = jwt.verify(token,'secretkey')
-      var id = decodedData.user[0]._id
-      var data = await UserService.create(req.body,id)
+      let token= req.headers.authorization;
+      let decodedData = jwt.verify(token,'secretkey')
+      let id = decodedData.user[0]._id
+      let data = await UserService.create(req.body,id)
       return ResponseHelper.success(data, 'photourl created successfully', res)
     } catch (error) {
       console.log("error===========>", error)

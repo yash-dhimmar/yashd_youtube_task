@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const uniqueValidator = require('mongoose-unique-validator')
 
-var ObjectId = mongoose.Types.ObjectId;
+let ObjectId = mongoose.Types.ObjectId;
 
 module.exports = (mongoose) => {
   const CategorySchema = new Schema({
@@ -34,3 +34,4 @@ module.exports = (mongoose) => {
   
   return mongoose.model('Category',CategorySchema, 'category')
 };
+

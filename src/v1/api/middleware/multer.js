@@ -14,7 +14,7 @@ const filestorage = multer.diskStorage({
 const upload = multer({
   storage: filestorage,
   fileFilter: (req, file, cb)=> {
-    var ext = path.extname(file.originalname)
+    let ext = path.extname(file.originalname)
     if (ext != '.mkv' && ext != '.mp4') {
       return cb(new Error("only video allowed"))
     }

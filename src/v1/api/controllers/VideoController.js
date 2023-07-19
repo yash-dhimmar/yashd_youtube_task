@@ -5,22 +5,22 @@ const jwt = require('jsonwebtoken')
 class VideoController {
   async uploadVideo(req, res) {
     try {
-      var token = req.headers.authorization
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id
-      var data = await VideoService.uploadVideo(req, userId)
-      return ResponseHelper.success(data, 'video uploaded successfully',res)
+      let token = req.headers.authorization
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id
+      let data = await VideoService.uploadVideo(req, userId)
+      return ResponseHelper.success(data, 'video uploaded successfully', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
     }
   }
   async getVideo(req, res) {
     try {
-      var token = req.headers.authorization
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id
-      var data = await VideoService.getVideo(req, userId)
-      return ResponseHelper.success(data, 'user upladed video list',res)
+      let token = req.headers.authorization
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id
+      let data = await VideoService.getVideo(req.body, userId)
+      return ResponseHelper.success(data, 'user upladed video list', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
     }
@@ -28,11 +28,11 @@ class VideoController {
 
   async videoDelete(req, res) {
     try {
-      var token = req.headers.authorization
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id
-      var data = await VideoService.videoDelete(req, userId)
-      return ResponseHelper.success(data, 'video deleted successfully',res)
+      let token = req.headers.authorization
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id
+      let data = await VideoService.videoDelete(req, userId)
+      return ResponseHelper.success(data, 'video deleted successfully', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
     }
@@ -40,13 +40,26 @@ class VideoController {
 
   async updateView(req, res) {
     try {
-      var token = req.headers.authorization
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id
-      var data = await VideoService.updateView(req, userId)
-      return ResponseHelper.success(data, 'view updated successfully',res)
+      let token = req.headers.authorization
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id
+      let data = await VideoService.updateView(req, userId)
+      return ResponseHelper.success(data, 'view updated successfully', res)
     } catch (error) {
-      console.log("error=========>>",error)
+      console.log("error=========>>", error)
+      return ResponseHelper.error(error, res)
+    }
+  }
+
+  async search(req, res) {
+    try {
+      let token = req.headers.authorization
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id
+      let data = await VideoService.search(req,res, userId)
+      return ResponseHelper.success(data, 'uaer search list', res)
+    } catch (error) {
+      console.log("error========>",error)
       return ResponseHelper.error(error, res)
     }
   }

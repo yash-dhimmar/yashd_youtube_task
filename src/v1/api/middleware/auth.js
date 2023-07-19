@@ -5,9 +5,9 @@ class GlobalAuthClass {
   async authenticate(req, res, next) {
     try {
       if ('authorization' in req.headers && req.headers.authorization != null) {
-        var token = req.headers.authorization;
+        let token = req.headers.authorization;
         console.log("token======>", token)
-        var decodedData = jwt.verify(token, 'secretkey')
+        let decodedData = jwt.verify(token, 'secretkey')
         if (decodedData.iat < decodedData.exp) {
           next()
         }

@@ -1,6 +1,6 @@
 const { User } = require('../../../data/models/index')
 const bcrypt = require('bcrypt')
-var CryptoJS = require("crypto-js");
+let CryptoJS = require("crypto-js");
 const { generateOTP, sendMails } = require('../../../utills/common')
 //const pm2 = require('pm2')
 
@@ -9,37 +9,37 @@ class AuthService {
     return new Promise(async (resolve, reject) => {
       try {
         let { channelName, email, password ,mobile_number,role} = body
-        var details = await User.find({ email: email })
+        let details = await User.find({ email: email })
 
         if (!details.length > 0) {
-          var hash_password = await bcrypt.hashSync(password, 10)
+          let hash_password = await bcrypt.hashSync(password, 10)
           // Generate random 16 bytes to use as IV
-          // var IV = CryptoJS.lib.WordArray.random(16);
+          // let IV = CryptoJS.lib.WordArray.random(16);
 
-          // var keyString = "DHIMMARYASHAAAAA";//KEY TO DECRYPTE TO MESSAGE
+          // let keyString = "DHIMMARYASHAAAAA";//KEY TO DECRYPTE TO MESSAGE
           // // finds the SHA-256 hash for the keyString
-          // var Key = CryptoJS.SHA256(keyString);
+          // let Key = CryptoJS.SHA256(keyString);
 
           // function encrypt(data) {
-          //   var val = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
-          //   var encrypted = CryptoJS.AES.encrypt(val, Key, { iv: IV }).toString();
-          //   var b64 = CryptoJS.enc.Base64.parse(encrypted).toString(CryptoJS.enc.Hex);
+          //   let val = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
+          //   let encrypted = CryptoJS.AES.encrypt(val, Key, { iv: IV }).toString();
+          //   let b64 = CryptoJS.enc.Base64.parse(encrypted).toString(CryptoJS.enc.Hex);
           //   return b64;
           // }
-          var insert = await User.create({ channelName, email, password: hash_password ,mobile_number,role})
-          // var data1 = {
+          let insert = await User.create({ channelName, email, password: hash_password ,mobile_number,role})
+          // let data1 = {
           //   channelName: "dhimmar yash",
           //   email: "yash123@gmail.com",
           //   password: "yash123"
           // };
-          // Set local variables to postman
+          // Set local letiables to postman
           // pm.set("encrypted", encrypt(data1));
           // pm.set("IV", IV.toString());
-          // var data = await User.create({ data1 })
+          // let data = await User.create({ data1 })
           resolve(insert)
 
         } else {
-          var err = { message: "YOU ARE ALREDY SIGNUP TO THIS EMAIL" }
+          let err = { message: "YOU ARE ALREDY SIGNUP TO THIS EMAIL" }
           reject(err)
         }
       } catch (error) {
@@ -52,17 +52,17 @@ class AuthService {
     return new Promise(async (resolve, reject) => {
       try {
         let { email, password } = body
-        var data = await User.find({ email: email })
+        let data = await User.find({ email: email })
         if (data.length > 0) {
-          var ismatch_password = await bcrypt.compareSync(password, data[0].password)
+          let ismatch_password = await bcrypt.compareSync(password, data[0].password)
           if (ismatch_password) {
             return resolve(data)
           } else {
-            var err = { message: "INVALID PASSWORD" }
+            let err = { message: "INVALID PASSWORD" }
             reject(err)
           }
         } else {
-          var err = { message: "PLEASE SIGN UP" }
+          let err = { message: "PLEASE SIGN UP" }
           reject(err)
         }
       } catch (error) {
@@ -74,7 +74,7 @@ class AuthService {
   async forgotPassword(body, email) {
     return new Promise(async (resolve, reject) => {
       try {
-        var data = await User.find({ email: email })
+        let data = await User.find({ email: email })
         if (data) {
           let otp = await generateOTP(4);
           console.log("email====>", otp)
@@ -82,7 +82,7 @@ class AuthService {
           await sendMails({ email, otp })
           return resolve()
         } else {
-          var err = { message: "THERE IS NO USER WITH THAT EMAIL" }
+          let err = { message: "THERE IS NO USER WITH THAT EMAIL" }
           reject(err)
         }
       } catch (error) {

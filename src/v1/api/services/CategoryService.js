@@ -5,7 +5,7 @@ class CategoryService {
     return new Promise(async (resolve, reject) => {
       try {
         let { title, description } = body
-        var category = await Category.create({
+        let category = await Category.create({
           title, description, userId: userId
         })
         
@@ -19,7 +19,7 @@ class CategoryService {
   async findAll(body, userId) {
     return new Promise(async (resolve, reject) => {
       try {
-        var category_list = await Category.find({userId:userId})
+        let category_list = await Category.find({userId:userId})
         return resolve(category_list)
       } catch (error) {
         return reject(error)
@@ -31,12 +31,12 @@ class CategoryService {
     return new Promise(async (resolve, reject) => {
       try {
         let { title, description, category_id } = body
-        var check = await Category.find({
+        let check = await Category.find({
           _id: category_id,
 
         })
         if (check.length > 0) {
-          var update_data = await Category.updateOne({
+          let update_data = await Category.updateOne({
             _id: category_id
           }, {
             $set: {
@@ -46,7 +46,7 @@ class CategoryService {
           })
           resolve()
         } else {
-          var err = { message: "THIS ID IS NOT FOUND PLEASE ENTER A VALID ID" }
+          let err = { message: "THIS ID IS NOT FOUND PLEASE ENTER A VALID ID" }
           reject(err)
         }
 
@@ -60,16 +60,16 @@ class CategoryService {
     return new Promise(async (resolve, reject) => {
       try {
         let {category_id} = body
-        var check = await Category.find({
+        let check = await Category.find({
           _id: category_id,
         })
         if (check.length > 0) {
-          var delete_data = await Category.deleteOne({
+          let delete_data = await Category.deleteOne({
             _id: category_id
           })
           resolve()
         } else {
-          var err = { message: "THIS ID IS NOT FOUND PLEASE ENTER A VALID ID" }
+          let err = { message: "THIS ID IS NOT FOUND PLEASE ENTER A VALID ID" }
           reject(err)
         }
       } catch (error) {

@@ -6,10 +6,10 @@ const jwt = require('jsonwebtoken')
 class CommentReplyController {
   async createComment(req, res) {
     try {
-      var token = req.headers.authorization;
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id;
-      var data = await CommentReplyService.createComment(req.body, userId)
+      let token = req.headers.authorization;
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id;
+      let data = await CommentReplyService.createComment(req.body, userId)
       return ResponseHelper.success(data, 'comment ia created to video', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
@@ -18,10 +18,10 @@ class CommentReplyController {
 
   async updateComment(req, res) {
     try {
-      var token = req.headers.authorization;
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id;
-      var data = await CommentReplyService.updateComment(req.body, userId)
+      let token = req.headers.authorization;
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id;
+      let data = await CommentReplyService.updateComment(req.body, userId)
       return ResponseHelper.success(data, 'comment ia updated to video', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
@@ -30,10 +30,10 @@ class CommentReplyController {
 
   async deleteComment(req, res) {
     try {
-      var token = req.headers.authorization;
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id;
-      var data = await CommentReplyService.deleteComment(req.body, userId)
+      let token = req.headers.authorization;
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id;
+      let data = await CommentReplyService.deleteComment(req.body, userId)
       return ResponseHelper.success(data, 'comment ia deleted to video', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
@@ -42,10 +42,10 @@ class CommentReplyController {
 
   async getComment(req, res) {
     try {
-      var token = req.headers.authorization;
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id;
-      var data = await CommentReplyService.getComment(req.body, userId)
+      let token = req.headers.authorization;
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id;
+      let data = await CommentReplyService.getComment(req.body, userId)
       return ResponseHelper.success(data, 'comment  video', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
@@ -54,10 +54,10 @@ class CommentReplyController {
 
   async getCommentByVideoId(req, res) {
     try {
-      var token = req.headers.authorization;
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id;
-      var data = await CommentReplyService.getCommentByVideoId(req.body, userId)
+      let token = req.headers.authorization;
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id;
+      let data = await CommentReplyService.getCommentByVideoId(req.body, userId)
       return ResponseHelper.success(data, 'comment video', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
@@ -67,10 +67,10 @@ class CommentReplyController {
 
   async createReply(req, res) {
     try {
-      var token = req.headers.authorization;
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id;
-      var data = await CommentReplyService.createReply(req.body, userId)
+      let token = req.headers.authorization;
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id;
+      let data = await CommentReplyService.createReply(req.body, userId)
       return ResponseHelper.success(data, 'comment reply is created to video', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
@@ -79,10 +79,10 @@ class CommentReplyController {
 
   async updateReply(req, res) {
     try {
-      var token = req.headers.authorization;
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id;
-      var data = await CommentReplyService.updateReply(req.body, userId)
+      let token = req.headers.authorization;
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id;
+      let data = await CommentReplyService.updateReply(req.body, userId)
       return ResponseHelper.success(data, 'comment reply is updated to video', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
@@ -91,10 +91,10 @@ class CommentReplyController {
 
   async deleteReply(req, res) {
     try {
-      var token = req.headers.authorization;
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id;
-      var data = await CommentReplyService.deleteReply(req.body, userId)
+      let token = req.headers.authorization;
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id;
+      let data = await CommentReplyService.deleteReply(req.body, userId)
       return ResponseHelper.success(data, 'comment reply is deleted to video', res)
     } catch (error) {
       return ResponseHelper.error(error, res)

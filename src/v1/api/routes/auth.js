@@ -8,11 +8,11 @@ const AuthController = require('../controllers/AuthController');
 
 //register api
 router.post('/sign-up',AuthController.signup);
-//login api
+//user login api
 router.post('/login',AuthController.login)
-//forgot-password api
+//user forgot-password api
 router.post('/forgot-password',GlobalAuthClass.authenticate,AuthController.forgotPassword)
-
+//user reset password api
 router.post('/reset-password',GlobalAuthClass.authenticate,AuthController.resetPassword)
 
 module.exports = router;

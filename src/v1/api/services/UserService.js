@@ -13,9 +13,9 @@ class UserService {
     return new Promise(async(resolve,reject)=>{
         try{
         let {photourl}=req.body
-        var data = await User.find({_id:_id})
+        let data = await User.find({_id:_id})
         if(data){
-            var insert = await User.create({photourl:req.file.filename})
+            let insert = await User.create({photourl:req.file.filename})
             resolve(insert)
         }
         }catch(error){

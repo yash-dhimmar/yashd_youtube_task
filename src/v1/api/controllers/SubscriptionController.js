@@ -6,10 +6,10 @@ class SubscriptionController {
 
   async createSubscriber(req, res) {
     try {
-      var token = req.headers.authorization;
-      var decodedData = jwt.verify(token, 'secretkey')
-      var _id = decodedData.user[0]._id
-      var data = await SubscriptionService.createSubscriber(req.body, _id)
+      let token = req.headers.authorization;
+      let decodedData = jwt.verify(token, 'secretkey')
+      let _id = decodedData.user[0]._id
+      let data = await SubscriptionService.createSubscriber(req.body, _id)
       return ResponseHelper.success(data, 'subscription successfully', res)
     } catch (error) {
       return ResponseHelper.error(error, res)

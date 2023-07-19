@@ -2,7 +2,7 @@
 //const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-var ObjectId = mongoose.Types.ObjectId;
+let ObjectId = mongoose.Types.ObjectId;
 
 module.exports = (mongoose) => {
   const SubscriptionSchema = new Schema({
@@ -16,11 +16,8 @@ module.exports = (mongoose) => {
       ref: 'User',
       required: true
     },
-
   }, {   
     timestamps: true
   });
-
-
   return mongoose.model('Subscription', SubscriptionSchema, 'subscription')
 };

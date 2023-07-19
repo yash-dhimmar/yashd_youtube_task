@@ -10,7 +10,7 @@ const {
 } = require('sequelize');
 const db = require('../data/models/index');
 const date = new Date()
-var moment = require('moment');
+let moment = require('moment');
 
 class Helper {
     async getOTP() {
@@ -124,8 +124,8 @@ class Helper {
             console.log("db_password", db_password)
 
             //Decode crypto-JS encypted String
-            var bytes = cryptoJs.AES.decrypt(body.password, process.env.SECRET_KEY);
-            var originalText = bytes.toString(cryptoJs.enc.Utf8);
+            let bytes = cryptoJs.AES.decrypt(body.password, process.env.SECRET_KEY);
+            let originalText = bytes.toString(cryptoJs.enc.Utf8);
 
             console.log("decoded", originalText)
 
@@ -194,7 +194,7 @@ class Helper {
 
     }
     formatDate(date) {
-        var d = new Date(date),
+        let d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
             year = d.getFullYear();
@@ -209,7 +209,7 @@ class Helper {
 
 
     formatDateAndTime(date) {
-        var d = new Date(date),
+        let d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
             year = d.getFullYear();
@@ -331,7 +331,7 @@ class Helper {
         }
     }
     formatDateWithTime(date) {
-        var d = new Date(date),
+        let d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
             year = d.getFullYear(),
@@ -364,11 +364,11 @@ class Helper {
         return hours + ':' + minutes + ':' + parseFloat(seconds).toFixed(0); // Return is HH : MM : SS
     }
     formatTime(date) {
-        var d = new Date(date),
+        let d = new Date(date),
             hours = d.getHours(),
             minutes = d.getMinutes(),
             seconds = d.getSeconds();
-        var ampm = hours >= 12 ? 'pm' : 'am';
+        let ampm = hours >= 12 ? 'pm' : 'am';
         hours = hours % 12;
         hours = hours ? hours : 12;
         hours = hours < 10 ? '0' + hours : hours;
@@ -378,11 +378,11 @@ class Helper {
     }
     getYaxisRange(lowerBound, upperBound, _maxTicks) {
         console.log(lowerBound, upperBound);
-        var maxTicks = _maxTicks || 10;
-        var tickSpacing;
-        var range;
-        var niceLowerBound;
-        var niceUpperBound;
+        let maxTicks = _maxTicks || 10;
+        let tickSpacing;
+        let range;
+        let niceLowerBound;
+        let niceUpperBound;
 
         const calculater = calculate();
 
@@ -414,18 +414,18 @@ class Helper {
             tickSpacing = niceNum(range / (maxTicks - 1), true);
             niceLowerBound = Math.floor(lowerBound / tickSpacing) * tickSpacing;
             niceUpperBound = Math.ceil(upperBound / tickSpacing) * tickSpacing;
-            var result = new Array();
-            for (var i = niceLowerBound; i <= niceUpperBound; i = i + tickSpacing) {
-                var rounded = Math.round((i + Number.EPSILON) * 100) / 100;
+            let result = new Array();
+            for (let i = niceLowerBound; i <= niceUpperBound; i = i + tickSpacing) {
+                let rounded = Math.round((i + Number.EPSILON) * 100) / 100;
                 result.push(rounded);
             }
             return result;
         }
 
         function niceNum(range, round) {
-            var exponent = Math.floor(Math.log10(range));
-            var fraction = range / Math.pow(10, exponent);
-            var niceFraction;
+            let exponent = Math.floor(Math.log10(range));
+            let fraction = range / Math.pow(10, exponent);
+            let niceFraction;
 
             if (round) {
                 if (fraction < 1.5) niceFraction = 1;
@@ -444,19 +444,19 @@ class Helper {
     }
     ageCalculate(dt1) {
         dt1 = new Date(dt1);
-        var starts = moment(dt1);
-        var ends = moment();
-        var years = ends.diff(starts, 'year');
+        let starts = moment(dt1);
+        let ends = moment();
+        let years = ends.diff(starts, 'year');
         starts.add(years, 'years');
 
-        var months = ends.diff(starts, 'months');
+        let months = ends.diff(starts, 'months');
         starts.add(months, 'months');
 
-        var days = ends.diff(starts, 'days');
+        let days = ends.diff(starts, 'days');
         if(days < 0 || years < 0 || months < 0){
             return '';
         }
-        var string = '';
+        let string = '';
         if (years > 0) {
             if (years > 1) {
                 string += years + ' Years ';
@@ -482,7 +482,7 @@ class Helper {
     }
 
     addMonths(date, months) {
-        var dateForm = date.getMonth() + 1
+        let dateForm = date.getMonth() + 1
     }
 
     addMonths(date, months) {
@@ -493,12 +493,12 @@ class Helper {
 
     func() {
 
-        var dateForm = date.getMonth() + 1
-        var start_date = this.addMonths(date, -6);
-        var monForm = start_date.getMonth() + 1
+        let dateForm = date.getMonth() + 1
+        let start_date = this.addMonths(date, -6);
+        let monForm = start_date.getMonth() + 1
         let x = {}
 
-        for (var i = monForm + 1; i <= dateForm; i++) {
+        for (let i = monForm + 1; i <= dateForm; i++) {
             x[i] = i
         }
         return x
@@ -507,7 +507,7 @@ class Helper {
     getMonthDifference(startDate, endDate) {
         startDate = new Date(startDate);
         endDate = new Date(endDate);
-        var difference = endDate.getMonth() - startDate.getMonth() + 12 * (endDate.getFullYear() - startDate.getFullYear());
+        let difference = endDate.getMonth() - startDate.getMonth() + 12 * (endDate.getFullYear() - startDate.getFullYear());
         return difference;
     }
     // truncate string with ellipsis
@@ -515,14 +515,14 @@ class Helper {
         return (str.length > n) ? str.slice(0, n-1) + '' : str;
     }
     getMonthDiff(dateString) {
-        var dt1 = new Date(dateString);
-        var starts = moment(dt1);
-        var ends = moment();
-        var years = ends.diff(starts, 'year');
+        let dt1 = new Date(dateString);
+        let starts = moment(dt1);
+        let ends = moment();
+        let years = ends.diff(starts, 'year');
         starts.add(years, 'years');
-        var months = ends.diff(starts, 'months');
+        let months = ends.diff(starts, 'months');
         starts.add(months, 'months');
-        var days = ends.diff(starts, 'days');
+        let days = ends.diff(starts, 'days');
         if(days < 0 || months < 0 || years < 0){
             return null;
         }

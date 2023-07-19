@@ -44,7 +44,7 @@
         <!-- <label class="calendly_label">Your Metting is confirmed</label> -->
     <% } %>
     <script>
-        var data = '<%- JSON.stringify(data) %>';
+        let data = '<%- JSON.stringify(data) %>';
         console.log("data =========>", data);
         window.onload = (event) => {
             sendDataToReactNativeApp(data)

@@ -1,25 +1,25 @@
 
 const { Reaction, Video } = require('../../../data/models/index')
-var mongoose = require('mongoose')
+let mongoose = require('mongoose')
 
 class ReactionService {
   async createReaction(body, userId) {
     return new Promise(async (resolve, reject) => {
       try {
         let { type, videoId } = body
-        var video = await Video.find({ _id: videoId })
+        let video = await Video.find({ _id: videoId })
         if (video.length > 0) {
-          var feeling = await Reaction.find({ videoId: videoId, userId: userId })
+          let feeling = await Reaction.find({ videoId: videoId, userId: userId })
           if (feeling.length > 0) {
-            var dlt = await Reaction.deleteOne({ videoId: videoId, userId: userId })
-            var dlt = { message: "like and dislike deleted successfully" }
-            reject(dlt)
+            let dlt = await Reaction.deleteOne({ videoId: videoId, userId: userId })
+            let delt = { message: "like and dislike deleted successfully" }
+            reject(delt)
           } else {
-            var insert = await Reaction.create({ type, videoId, userId: userId })
+            let insert = await Reaction.create({ type, videoId, userId: userId })
             resolve()
           }
         } else {
-          var err = { message: "ID NOT FOUND PLEASE ENTER VALID ID" }
+          let err = { message: "ID NOT FOUND PLEASE ENTER VALID ID" }
           reject(err)
         }
       } catch (error) {
@@ -32,7 +32,7 @@ class ReactionService {
     return new Promise(async (resolve, reject) => {
       try {
         const data = await Reaction.aggregate([
-          { $match: { userId:  new mongoose.Types.ObjectId(userId) } },
+          { $match: { userId: new mongoose.Types.ObjectId(userId) } },
           {
             $lookup: {
               from: "Video",
@@ -48,7 +48,7 @@ class ReactionService {
             }
           }
         ])
-        let result = data.map(({feeling }) => feeling[0])
+        let result = data.map(({ feeling }) => feeling[0])
         resolve(result)
       } catch (error) {
         return reject(error)

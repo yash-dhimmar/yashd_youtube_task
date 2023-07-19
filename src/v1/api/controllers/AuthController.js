@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 class AuthController {
   async signup(req, res) {
     try {
-      var data = await AuthService.signup(req.body)
+      let data = await AuthService.signup(req.body)
       return ResponseHelper.success(data, 'signup- successfully', res)
     } catch (error) {
       console.log("error===========>", error)
@@ -15,9 +15,9 @@ class AuthController {
   }
   async login(req, res) {
     try {
-      var user = await AuthService.login(req.body)
+      let user = await AuthService.login(req.body)
       if (user) {
-        var token = await jwt.sign({ user }, 'secretkey', { expiresIn: '20d' })
+        let token = await jwt.sign({ user }, 'secretkey', { expiresIn: '20d' })
       }
       console.log("token=====>", token)
       console.log("req.body=====>",user[0].email)
@@ -32,10 +32,10 @@ class AuthController {
 
   async forgotPassword(req, res) {
     try {
-      var token= req.headers.authorization;
-      var decodedData = jwt.verify(token,'secretkey')
-      var email = decodedData.user[0].email
-      var data = await AuthService.forgotPassword(req.body,email)
+      let token= req.headers.authorization;
+      let decodedData = jwt.verify(token,'secretkey')
+      let email = decodedData.user[0].email
+      let data = await AuthService.forgotPassword(req.body,email)
       return ResponseHelper.success(data, 'password send to the mail - successfully', res)
     } catch (error) {
       console.log("error===========>", error)
@@ -45,10 +45,10 @@ class AuthController {
 
   async resetPassword(req, res) {
     try {
-      var token= req.headers.authorization;
-      var decodedData = jwt.verify(token,'secretkey')
-      var _id = decodedData.user[0]._id
-      var data = await AuthService.resetPassword(req.body,_id)
+      let token= req.headers.authorization;
+      let decodedData = jwt.verify(token,'secretkey')
+      let _id = decodedData.user[0]._id
+      let data = await AuthService.resetPassword(req.body,_id)
       return ResponseHelper.success(data, 'password  reset successfully', res)
     } catch (error) {
       console.log("error===========>", error)

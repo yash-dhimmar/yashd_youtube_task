@@ -5,10 +5,10 @@ const jwt = require('jsonwebtoken')
 class CategoryController {
   async create(req, res) {
     try {
-      var token = req.headers.authorization
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id
-      var data = await CategoryService.create(req.body, userId)
+      let token = req.headers.authorization
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id
+      let data = await CategoryService.create(req.body, userId)
       return ResponseHelper.success(data, 'category created successfully',res)
     } catch (error) {
       return ResponseHelper.error(error, res)
@@ -17,10 +17,10 @@ class CategoryController {
 
   async findAll(req, res) {
     try {
-      var token = req.headers.authorization
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id
-      var data = await CategoryService.findAll(req.body, userId)
+      let token = req.headers.authorization
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id
+      let data = await CategoryService.findAll(req.body, userId)
       return ResponseHelper.success(data, 'category list',res)
     } catch (error) {
       return ResponseHelper.error(error, res)
@@ -29,10 +29,10 @@ class CategoryController {
 
   async update(req, res) {
     try {
-      var token = req.headers.authorization
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id
-      var data = await CategoryService.update(req.body, userId)
+      let token = req.headers.authorization
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id
+      let data = await CategoryService.update(req.body, userId)
       return ResponseHelper.success(data, 'category update successfully',res)
     } catch (error) {
       return ResponseHelper.error(error, res)
@@ -41,10 +41,10 @@ class CategoryController {
 
   async deleteData(req, res) {
     try {
-      var token = req.headers.authorization
-      var decodedData = jwt.verify(token, 'secretkey')
-      var userId = decodedData.user[0]._id
-      var data = await CategoryService.deleteData(req.body, userId)
+      let token = req.headers.authorization
+      let decodedData = jwt.verify(token, 'secretkey')
+      let userId = decodedData.user[0]._id
+      let data = await CategoryService.deleteData(req.body, userId)
       return ResponseHelper.success(data, 'category deleted successfully',res)
     } catch (error) {
       return ResponseHelper.error(error, res)

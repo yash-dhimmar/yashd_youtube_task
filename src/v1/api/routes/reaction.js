@@ -6,7 +6,9 @@ const path = require('path')
 const GlobalAuthClass = require('../middleware/auth');
 const FeelingController = require('../controllers/ReactionController')
 
-router.post('/create',GlobalAuthClass.authenticate,FeelingController.createReaction)
-router.post('/get-feeling',GlobalAuthClass.authenticate,FeelingController.getReaction)
+//user create reaction api for video
+router.post('/create', GlobalAuthClass.authenticate, FeelingController.createReaction)
+//user get reaction for video
+router.post('/get-feeling', GlobalAuthClass.authenticate, FeelingController.getReaction)
 
 module.exports = router;

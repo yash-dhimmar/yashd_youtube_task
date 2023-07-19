@@ -24,7 +24,7 @@ class GlobalAuthClass {
             const token = await getToken(req.headers);
             
             if (!token){
-                var error = new Error("CAN'T GET TOKEN")
+                let error = new Error("CAN'T GET TOKEN")
                 error.code = 400;
                 throw error;
             };
@@ -51,7 +51,7 @@ class GlobalAuthClass {
         try {
             console.log("Res", req.headers)
             //   let data = await validate.validateHeaders(req.headers);
-            var validation = await validate.validateHeaders(req.headers);
+            let validation = await validate.validateHeaders(req.headers);
             console.log("check:::", validation.status)
             if (validation.status == false) {
                 return responseHelper.error(res, validation.message, req.headers.langauge, null, 400);
@@ -79,14 +79,14 @@ class GlobalAuthClass {
     async initialAuthenticate(req, res, next) {
         try {
             //   await validate.validateHeaders(req.headers);
-            var validation = await validate.validateHeaders(req.headers);
+            let validation = await validate.validateHeaders(req.headers);
             if (validation.status == false) {
                 return responseHelper.error(res, validation.message || '', error.code || 400);
             }
             if (req.headers.authorization == process.env.APP_TOKEN) {
                 next();
             } else {
-                var error = new Error('AUTHORIZED_DENIED');
+                let error = new Error('AUTHORIZED_DENIED');
                 error.code = 400;
                 throw error;
             }
@@ -99,13 +99,13 @@ class GlobalAuthClass {
 
     async passportAuthenticate(req, res, next) {
         try {
-            var validation = await validate.validateHeaders(req.headers);
+            let validation = await validate.validateHeaders(req.headers);
             if (validation.status == false) {
                 return ResponseHelper.error(false, res, validation.message || '', 400);
             }
             const token = await getToken(req.headers);
             if (!token) {
-                var error = new Error("TOKEN_NOT_PRESENT");
+                let error = new Error("TOKEN_NOT_PRESENT");
                 error.code = 403;
                 throw error;
             };
@@ -117,7 +117,7 @@ class GlobalAuthClass {
                 }
             })
             if (!userDeviceToken) {
-                var error = new Error("TOKEN_NOT_PRESENT");
+                let error = new Error("TOKEN_NOT_PRESENT");
                 error.code = 403;
                 throw error;
             }
