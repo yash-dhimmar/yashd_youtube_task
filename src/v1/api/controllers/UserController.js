@@ -4,7 +4,7 @@ const UserService = require('../services/UserService')
 const ResponseHelper = require('../../api/resources/response');
 
 class UserController {
-  async create(req, res) {
+  async createUser(req, res) {
     try {
       let token= req.headers.authorization;
       let decodedData = jwt.verify(token,'secretkey')
@@ -15,7 +15,6 @@ class UserController {
       console.log("error===========>", error)
       return ResponseHelper.error(error, res)
     }
-  }
-   
+  }  
 }
 module.exports = new UserController();

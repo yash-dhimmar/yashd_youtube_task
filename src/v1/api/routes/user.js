@@ -7,11 +7,8 @@ const GlobalAuthClass = require('../../../modules/middleware/auth');
 const UserController = require('../../api/controllers/UserController');
 
 
-router.post('/create',GlobalAuthClass.authenticate,upload.single("image"),UserController.create)
-// // sign in api
-// router.post('/sign-in', GlobalAuthClass.initialAuthenticate,UserController.signin);
+router.post('/create',GlobalAuthClass.authenticate,upload.single("image"),UserController.createUser)
 
-// // verify email address
 // router.get('/verify-email/:id', UserController.verifyMail);
 
 module.exports = router;

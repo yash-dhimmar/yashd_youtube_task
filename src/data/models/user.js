@@ -47,6 +47,11 @@ module.exports = (mongoose) => {
             required: false,
             default: "",
         },
+        refresh_token: {
+            type: String,
+            required: false,
+            default: "",
+        },
         status: {
             type: Boolean, // 0=inactive,1=active
             required: false,

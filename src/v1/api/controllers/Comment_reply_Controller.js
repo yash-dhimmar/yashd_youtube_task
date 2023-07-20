@@ -1,8 +1,6 @@
 const ResponseHelper = require('../resources/response')
 const CommentReplyService = require('../services/Comment_reply_Service')
 const jwt = require('jsonwebtoken')
-
-
 class CommentReplyController {
   async createComment(req, res) {
     try {

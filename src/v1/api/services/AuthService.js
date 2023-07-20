@@ -2,13 +2,14 @@ const { User } = require('../../../data/models/index')
 const bcrypt = require('bcrypt')
 let CryptoJS = require("crypto-js");
 const { generateOTP, sendMails } = require('../../../utills/common')
+const jwt = require = ('jsonwebtoken')
 //const pm2 = require('pm2')
 
 class AuthService {
   async signup(body) {
     return new Promise(async (resolve, reject) => {
       try {
-        let { channelName, email, password ,mobile_number,role} = body
+        let { channelName, email, password, mobile_number, role } = body
         let details = await User.find({ email: email })
 
         if (!details.length > 0) {
@@ -26,7 +27,7 @@ class AuthService {
           //   let b64 = CryptoJS.enc.Base64.parse(encrypted).toString(CryptoJS.enc.Hex);
           //   return b64;
           // }
-          let insert = await User.create({ channelName, email, password: hash_password ,mobile_number,role})
+          let insert = await User.create({ channelName, email, password: hash_password, mobile_number, role })
           // let data1 = {
           //   channelName: "dhimmar yash",
           //   email: "yash123@gmail.com",
@@ -111,6 +112,18 @@ class AuthService {
           where: { _id: _id }
         });
         return resolve()
+      } catch (error) {
+        return reject(error)
+      }
+    })
+  }
+
+  async refreshtoken(body, userId) {
+    return new Promise(async (resolve, reject) => {
+      try {
+       var data = await User.find({ userId: userId })
+        const token = jwt.sign(data, 'secretkey', { expiresIn: '20d' })
+        resolve(token)
       } catch (error) {
         return reject(error)
       }
