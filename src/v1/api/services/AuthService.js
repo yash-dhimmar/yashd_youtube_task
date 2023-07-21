@@ -2,8 +2,10 @@ const { User } = require('../../../data/models/index')
 const bcrypt = require('bcrypt')
 let CryptoJS = require("crypto-js");
 const { generateOTP, sendMails } = require('../../../utills/common')
-const jwt = require = ('jsonwebtoken')
+const jwt = require('jsonwebtoken')
+const generateTokens = require('../middleware/generateToken')
 //const pm2 = require('pm2')
+const verifyRefreshToken = require("../middleware/verifyrefreshtoken")
 
 class AuthService {
   async signup(body) {
@@ -53,11 +55,16 @@ class AuthService {
     return new Promise(async (resolve, reject) => {
       try {
         let { email, password } = body
-        let data = await User.find({ email: email })
-        if (data.length > 0) {
-          let ismatch_password = await bcrypt.compareSync(password, data[0].password)
+        let user = await User.find({ email: email })
+        if (user.length > 0) {
+          let ismatch_password = await bcrypt.compareSync(password, user[0].password)
           if (ismatch_password) {
-            return resolve(data)
+            const { accessToken, refreshToken } = await generateTokens(user);
+            const detail = {
+              accessToken,
+              refreshToken
+            }
+            return resolve(detail)
           } else {
             let err = { message: "INVALID PASSWORD" }
             reject(err)
@@ -118,12 +125,27 @@ class AuthService {
     })
   }
 
-  async refreshtoken(body, userId) {
+  async refreshtoken(body) {
     return new Promise(async (resolve, reject) => {
       try {
-       var data = await User.find({ userId: userId })
-        const token = jwt.sign(data, 'secretkey', { expiresIn: '20d' })
-        resolve(token)
+
+        verifyRefreshToken(body.refreshToken)
+          .then(async (tokenDetails) => {
+            const payload = { _id: tokenDetails._id };
+            const accessToken = jwt.sign(
+              payload,
+              'secretkey',
+              { expiresIn: "1m" }
+            );
+            console.log("accessToken==================>", accessToken)
+            var data = await  User.updateOne({ _id: tokenDetails._id }, {
+              $set: {
+                accessToken: accessToken
+              }
+            })
+            console.log("data=======>", data)
+            return resolve(accessToken)
+          })
       } catch (error) {
         return reject(error)
       }

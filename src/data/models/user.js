@@ -22,10 +22,10 @@ module.exports = (mongoose) => {
         },
 
         photourl: {
-            type:String,
+            type: String,
             required: false,
-            default:"",
-           
+            default: "",
+
         },
         role: {
             type: String, //1=user,2=admin,
@@ -34,20 +34,20 @@ module.exports = (mongoose) => {
         },
         password: {
             type: String,
-            required: false,        
-            default:"",
-        },
-        auth_token: {
-            type: String,
             required: false,
-            default:"",
+            default: "",
         },
-        otp: {
+        refreshToken: {
             type: String,
             required: false,
             default: "",
         },
-        refresh_token: {
+        accessToken: {
+            type: String,
+            required: false,
+            default: "",
+        },
+        otp: {
             type: String,
             required: false,
             default: "",
@@ -57,11 +57,11 @@ module.exports = (mongoose) => {
             required: false,
             default: 1,
         },
-       
-    }, 
+
+    },
         { toJSON: { virtuals: true }, toObject: { virtuals: true }, timestamps: true }
     );
-   // UserSchema.index({ channelName:'text' })
+    // UserSchema.index({ channelName:'text' })
     UserSchema.virtual('subscription', {
         ref: 'Subscription',
         localField: '_id',
@@ -69,15 +69,15 @@ module.exports = (mongoose) => {
         justOne: false,
         count: true,
         match: { userId: this._id }
-      })
-      UserSchema.virtual('Video', {
+    })
+    UserSchema.virtual('Video', {
         ref: 'Video',
         localField: '_id',
         foreignField: 'userId',
         justOne: false,
         count: true
-      })
-      
+    })
 
-    return  mongoose.model('User', UserSchema, 'users')
+
+    return mongoose.model('User', UserSchema, 'users')
 };

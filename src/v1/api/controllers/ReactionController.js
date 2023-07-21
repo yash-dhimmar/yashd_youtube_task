@@ -7,7 +7,7 @@ class ReactionController {
     try {
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
-      let userId = decodedData.user[0]._id
+      let userId = decodedData._id
       let data = await ReactionService.createReaction(req.body,userId)
       return ResponseHelper.success(data, 'like and dislike is created', res)
     } catch (error) {
@@ -20,7 +20,7 @@ class ReactionController {
     try {
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
-      let userId = decodedData.user[0]._id
+      let userId = decodedData._id
       let data = await ReactionService.getReaction(req.body,userId)
       return ResponseHelper.success(data, 'user like and dislike video', res)
     } catch (error) {

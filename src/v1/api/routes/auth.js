@@ -15,6 +15,7 @@ router.post('/forgot-password',GlobalAuthClass.authenticate,AuthController.forgo
 //user reset password api
 router.post('/reset-password',GlobalAuthClass.authenticate,AuthController.resetPassword)
 
-router.post('/refresh-token',GlobalAuthClass.authenticate,AuthController.refreshtoken)
+router.post('/refresh-token',AuthController.refreshtoken)
+
 
 module.exports = router;

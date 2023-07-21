@@ -1,0 +1,22 @@
+const { UserToken, User } = require("../../../data/models/index")
+const jwt = require("jsonwebtoken");
+
+const verifyRefreshToken = (refreshToken) => {
+
+	return new Promise(async (resolve, reject) => {
+		try {
+			var data =  User.findOne({ refreshToken: refreshToken })
+			if (!data)
+				return  reject ({ error: true, message: "Invalid refresh token" });
+			jwt.verify(refreshToken, 'secretkey', (err, tokenDetails) => {
+				if (err) {
+					return reject ({ error: true, message: "Invalid refresh token" });
+				}
+				return resolve (tokenDetails);
+			});
+		} catch (error) {
+			reject(error)
+		}
+	});
+};
+module.exports = verifyRefreshToken

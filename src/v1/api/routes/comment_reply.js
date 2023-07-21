@@ -15,7 +15,7 @@ router.post('/delete-comment',GlobalAuthClass.authenticate,CommentReplyControlle
 //user get comment api
 router.post('/get-comment',GlobalAuthClass.authenticate,CommentReplyController.getComment)
 //user get cooment by video id
-router.post('/get-commentby-videoId',GlobalAuthClass.authenticate,CommentReplyController.getCommentByVideoId)
+router.post('/get-commentby-videoId',GlobalAuthClass.authenticate,CommentReplyController.getCommentByVideoId)   
 
 //user comment reply api
 router.post('/create-reply',GlobalAuthClass.authenticate,CommentReplyController.createReply)
