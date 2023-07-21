@@ -2,10 +2,12 @@ const AuthService = require('../../api/services/AuthService')
 const ResponseHelper = require('../../api/resources/response')
 const { User, RefreshToken } = require('../../../data/models/index')
 const jwt = require('jsonwebtoken')
+const Validator = require ('../middleware/validation')
 
 class AuthController {
   async signup(req, res) {
     try {
+      await Validator.signupValidation(req.body)
       let data = await AuthService.signup(req.body)
       return ResponseHelper.success(data, 'signup- successfully', res)
     } catch (error) {
