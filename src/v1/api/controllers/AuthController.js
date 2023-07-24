@@ -14,7 +14,7 @@ class AuthController {
       console.log("error===========>", error)
       return ResponseHelper.error(error, res)
     }
-  }
+  }  
   async login(req, res) {
     try {
       let user = await AuthService.login(req.body)

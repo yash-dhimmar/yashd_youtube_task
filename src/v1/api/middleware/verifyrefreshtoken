@@ -5,14 +5,16 @@ const verifyRefreshToken = (refreshToken) => {
 
 	return new Promise(async (resolve, reject) => {
 		try {
-			var data =  User.findOne({ refreshToken: refreshToken })
-			if (!data)
-				return  reject ({ error: true, message: "Invalid refresh token" });
+			var data = await User.findOne({ refreshToken: refreshToken })
+		
+			console.log("data=========>",data)
+				 
 			jwt.verify(refreshToken, 'secretkey', (err, tokenDetails) => {
 				if (err) {
-					return reject ({ error: true, message: "Invalid refresh token" });
+					return reject({ error: true, message: "Invalid refresh TOKEN" });
 				}
-				return resolve (tokenDetails);
+				console.log()
+				return resolve(tokenDetails);
 			});
 		} catch (error) {
 			reject(error)
