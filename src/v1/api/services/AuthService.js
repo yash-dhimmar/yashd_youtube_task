@@ -127,28 +127,25 @@ class AuthService {
 
   async refreshtoken(body) {
     return new Promise(async (resolve, reject) => {
-      try {
+      verifyRefreshToken(body.refreshToken).then(async (tokenDetails) => {
+        const payload = { _id: tokenDetails._id };
+        const accessToken = jwt.sign(
+          payload,
+          'secretkey',
+          { expiresIn: "1m" }
+        );
+        console.log("accessToken==================>", accessToken)
+        var data = await User.updateOne({ _id: tokenDetails._id }, {
+          $set: {
+            accessToken: accessToken
+          }
+        })
+        console.log("data=======>", data)
+        resolve(accessToken)
+      }).catch(async(err) => {
+        reject(err)
+      });
 
-        verifyRefreshToken(body.refreshToken)
-          .then(async (tokenDetails) => {
-            const payload = { _id: tokenDetails._id };
-            const accessToken = jwt.sign(
-              payload,
-              'secretkey',
-              { expiresIn: "1m" }
-            );
-            console.log("accessToken==================>", accessToken)
-            var data = await  User.updateOne({ _id: tokenDetails._id }, {
-              $set: {
-                accessToken: accessToken
-              }
-            })
-            console.log("data=======>", data)
-            return resolve(accessToken)
-          })
-      } catch (error) {
-        return reject(error)
-      }
     })
   }
 

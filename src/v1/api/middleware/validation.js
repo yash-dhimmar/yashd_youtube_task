@@ -4,10 +4,10 @@ class Validator {
   async signupValidation(body) {
     try {
       const joiSchema = Joi.object({
-        channelname: Joi.string().required(),
+        channelName: Joi.string().required(),
         email: Joi.string().required(),
         password: Joi.string().required(),
-        mobilenumber: Joi.string().length(10).required(),
+        mobile_number: Joi.string().length(10).required(),
         role: Joi.string().required()
       });
       return await joiSchema.validateAsync(body);
