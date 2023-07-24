@@ -12,7 +12,7 @@ const generateTokens = async (user) => {
         const refreshToken = jwt.sign(
             payload,
             'secretkey',
-            { expiresIn: "2m" }
+            { expiresIn: "20m" }
         );
         const userToken = await User.find({ _id: user[0]._id });
         if (userToken) {
