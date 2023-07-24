@@ -17,6 +17,7 @@ class AuthController {
   }
   async login(req, res) {
     try {
+      await Validator.loginValidation(req.body)
       let user = await AuthService.login(req.body)
       return ResponseHelper.success(user, 'login- successfully', res)
     } catch (error) {
@@ -40,6 +41,7 @@ class AuthController {
 
   async resetPassword(req, res) {
     try {
+      await Validator.ResetPasswordValidation(req.body)
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
       let _id = decodedData.user[0]._id
@@ -53,6 +55,7 @@ class AuthController {
 
   async refreshtoken(req, res) {
     try {
+      await Validator.RefreshTokenValidation(req.body)
       let data = await AuthService.refreshtoken(req.body)
       return ResponseHelper.success(data, 'password  reset successfully', res)
     } catch (error) {
@@ -60,7 +63,5 @@ class AuthController {
       return ResponseHelper.error(error, res)
     }
   }
-
-
 }
 module.exports = new AuthController()

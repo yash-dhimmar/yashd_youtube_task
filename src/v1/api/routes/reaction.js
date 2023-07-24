@@ -9,6 +9,6 @@ const FeelingController = require('../controllers/ReactionController')
 //user create reaction api for video
 router.post('/create', GlobalAuthClass.authenticate, FeelingController.createReaction)
 //user get reaction for video
-router.post('/get-feeling', GlobalAuthClass.authenticate, FeelingController.getReaction)
+router.get('/get-feeling', GlobalAuthClass.authenticate, FeelingController.getReaction)
 
 module.exports = router;

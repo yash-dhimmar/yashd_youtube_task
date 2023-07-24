@@ -1,15 +1,17 @@
 const ResponseHelper = require('../resources/response')
 const CategoryService = require('../services/CategoryService')
 const jwt = require('jsonwebtoken')
+const Validator = require('../middleware/validation')
 
 class CategoryController {
   async create(req, res) {
     try {
+      await Validator.createCategoryValidation(req.body)
       let token = req.headers.authorization
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id
       let data = await CategoryService.create(req.body, userId)
-      return ResponseHelper.success(data, 'category created successfully',res)
+      return ResponseHelper.success(data, 'category created successfully', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
     }
@@ -21,7 +23,7 @@ class CategoryController {
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id
       let data = await CategoryService.findAll(req.body, userId)
-      return ResponseHelper.success(data, 'category list',res)
+      return ResponseHelper.success(data, 'category list', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
     }
@@ -29,11 +31,12 @@ class CategoryController {
 
   async update(req, res) {
     try {
+      await Validator.UpdateCategoryValidation(req.body)
       let token = req.headers.authorization
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id
       let data = await CategoryService.update(req.body, userId)
-      return ResponseHelper.success(data, 'category update successfully',res)
+      return ResponseHelper.success(data, 'category update successfully', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
     }
@@ -41,11 +44,12 @@ class CategoryController {
 
   async deleteData(req, res) {
     try {
+      await Validator.DeleteCategoryValidation(req.body)
       let token = req.headers.authorization
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id
       let data = await CategoryService.deleteData(req.body, userId)
-      return ResponseHelper.success(data, 'category deleted successfully',res)
+      return ResponseHelper.success(data, 'category deleted successfully', res)
     } catch (error) {
       return ResponseHelper.error(error, res)
     }

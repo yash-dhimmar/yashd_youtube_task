@@ -1,10 +1,12 @@
 const ResponseHelper = require('../resources/response')
 const ReactionService = require('../services/ReactionService')
 const jwt = require('jsonwebtoken')
+const Validator = require("../middleware/validation")
 
 class ReactionController {
   async createReaction(req, res) {
     try {
+      await Validator.CreateReactionValidation(req.body)
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData._id

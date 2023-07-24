@@ -1,10 +1,12 @@
 const ResponseHelper = require('../resources/response')
 const HistoryService = require('../services/HistoryService')
 const jwt = require('jsonwebtoken')
+const Validator = require('../middleware/validation')
 
 class HistoryController {
   async createHistory(req, res) {
     try {
+      await Validator.CreateHistoryValidation(req.body)
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id
@@ -18,6 +20,7 @@ class HistoryController {
   
   async deleteHistory(req, res) {
     try {
+      await Validator.DeleteHistoryValidation(req.body)
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id

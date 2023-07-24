@@ -7,12 +7,12 @@ const generateTokens = async (user) => {
         const accessToken = jwt.sign(
             payload,
             'secretkey',
-            { expiresIn: "1m" }
+            { expiresIn: "20d" }
         );
         const refreshToken = jwt.sign(
             payload,
             'secretkey',
-            { expiresIn: "2m" }
+            { expiresIn: "20m" }
         );
         const userToken = await User.find({ _id: user[0]._id });
         if (userToken) {
