@@ -142,7 +142,7 @@ class AuthService {
         })
         console.log("data=======>", data)
         resolve(accessToken)
-      }).catch(async(err) => {
+      }).catch((err) => {
         reject(err)
       });
 

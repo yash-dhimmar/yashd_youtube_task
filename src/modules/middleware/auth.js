@@ -18,33 +18,33 @@ const getToken = headers => {
     return null;
 };
 class GlobalAuthClass {
-    async authenticate(req, res, next) {
-        try {
-            await validate.validateHeaders(req.headers);
-            const token = await getToken(req.headers);
+    // async authenticate(req, res, next) {
+    //     try {
+    //         await validate.validateHeaders(req.headers);
+    //         const token = await getToken(req.headers);
             
-            if (!token){
-                let error = new Error("CAN'T GET TOKEN")
-                error.code = 400;
-                throw error;
-            };
+    //         if (!token){
+    //             let error = new Error("CAN'T GET TOKEN")
+    //             error.code = 400;
+    //             throw error;
+    //         };
 
-            const verified = jwt.verify(token, process.env.APP_KEY);
-            if (!verified) throw 'TOKEN_MALFORMED';
+    //         const verified = jwt.verify(token, process.env.APP_KEY);
+    //         if (!verified) throw 'TOKEN_MALFORMED';
 
-            const customer = await User.findOne({
-                where: {
-                    id: verified.id
-                },
-                raw: true,
-            });
+    //         const customer = await User.findOne({
+    //             where: {
+    //                 id: verified.id
+    //             },
+    //             raw: true,
+    //         });
 
-            if (!customer) throw 'UNAUTHORIZED';
-            next();
-        } catch (error) {
-            responseHelper.error(res, error, req.headers.language);
-        }
-    }
+    //         if (!customer) throw 'UNAUTHORIZED';
+    //         next();
+    //     } catch (error) {
+    //         responseHelper.error(res, error, req.headers.language);
+    //     }
+    // }
 
 
     async adminAuthenticate(req, res, next) {
