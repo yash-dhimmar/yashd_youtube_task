@@ -12,9 +12,9 @@ router.post('/upload_video',GlobalAuthClass.authenticate,upload.single('video'),
 //user get video api
 router.get('/user-get-video',GlobalAuthClass.authenticate,VideoController.getVideo)
 //user video delete api
-router.post('/video_delete',GlobalAuthClass.authenticate,VideoController.videoDelete)
+router.delete('/video_delete',GlobalAuthClass.authenticate,VideoController.videoDelete)
 //video update view api
-router.post('/update_view',GlobalAuthClass.authenticate,VideoController.updateView)
+router.put('/update_view',GlobalAuthClass.authenticate,VideoController.updateView)
 
 //search api
 router.post('/search',GlobalAuthClass.authenticate,VideoController.search)

@@ -160,7 +160,7 @@ async GetCommentByVideoIdValidation(body) {
         commentId: Joi.string().required(),
         text: Joi.string().required(),
       });
-      return await joiSchema.validateAsync(body);
+      return await joiSchema.validateAsync(body);  
     } catch (err) {
       //let error = { message: e.details ? e.details[0].message : e.message, code: 400 };
       let error = { message: err.message, code: 400 };

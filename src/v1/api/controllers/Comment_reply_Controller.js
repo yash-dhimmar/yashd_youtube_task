@@ -1,9 +1,11 @@
 const ResponseHelper = require('../resources/response')
 const CommentReplyService = require('../services/Comment_reply_Service')
 const jwt = require('jsonwebtoken')
+const Validator = require('../middleware/validation')
 class CommentReplyController {
   async createComment(req, res) {
     try {
+      await Validator.CreateCommentValidation(req.body)
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id;
@@ -16,6 +18,7 @@ class CommentReplyController {
 
   async updateComment(req, res) {
     try {
+      await Validator.UpdateCommentValidation(req.body)
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id;
@@ -28,6 +31,7 @@ class CommentReplyController {
 
   async deleteComment(req, res) {
     try {
+      await Validator.DeleteCommentValidation(req.body)
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id;
@@ -52,6 +56,7 @@ class CommentReplyController {
 
   async getCommentByVideoId(req, res) {
     try {
+      await Validator.GetCommentByVideoIdValidation(req.body)
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id;
@@ -65,6 +70,7 @@ class CommentReplyController {
 
   async createReply(req, res) {
     try {
+      await Validator.CreateReplyValidation(req.body)
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id;
@@ -77,6 +83,7 @@ class CommentReplyController {
 
   async updateReply(req, res) {
     try {
+      await Validator.UpdateReplyValidation(req.body)
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id;
@@ -89,6 +96,7 @@ class CommentReplyController {
 
   async deleteReply(req, res) {
     try {
+      await Validator.DeleteReplyValidation(req.body)
       let token = req.headers.authorization;
       let decodedData = jwt.verify(token, 'secretkey')
       let userId = decodedData.user[0]._id;
@@ -98,7 +106,7 @@ class CommentReplyController {
       return ResponseHelper.error(error, res)
     }
   }
-  
+
 
 }
 module.exports = new CommentReplyController()

@@ -8,6 +8,6 @@ const AuthController = require('../controllers/AuthController');
 const SubscriptionController = require('../controllers/SubscriptionController')
 
 //user subscribe to channel api
-router.post('/crete-subscriber',GlobalAuthClass.authenticate,SubscriptionController.createSubscriber)
+router.post('/create-subscriber',GlobalAuthClass.authenticate,SubscriptionController.createSubscriber)
 
 module.exports = router;
