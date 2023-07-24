@@ -18,6 +18,7 @@ const upload = multer({
     if (ext != '.mkv' && ext != '.mp4') {
       return cb(new Error("only video allowed"))
     }
+
     cb(null, true)
   }
 })

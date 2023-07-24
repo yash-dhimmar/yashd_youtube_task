@@ -21,7 +21,7 @@ module.exports = (mongoose) => {
             default: "",
         },
 
-        photourl: {
+        image: {
             type: String,
             required: false,
             default: "",

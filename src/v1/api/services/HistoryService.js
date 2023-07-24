@@ -6,7 +6,7 @@ class HistoryService {
     return new Promise(async (resolve, reject) => {
       try {
         let { searchText, type, videoId } = body
-
+//changed by yash dhimmar
         let video = await Video.find({ _id: videoId })
         if (video.length > 0) {
           let history = await History.create({
