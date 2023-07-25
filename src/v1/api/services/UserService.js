@@ -20,7 +20,7 @@ class UserService {
             resolve(insert)
         }
         }catch(error){
-            return reject (error)
+            return reject (error)   
         }
     })
    }
