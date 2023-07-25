@@ -22,7 +22,7 @@ class UserService {
         }catch(error){
             return reject (error)   
         }
-    })
+    })   
    }
 }
 module.exports = new UserService()
