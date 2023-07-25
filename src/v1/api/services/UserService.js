@@ -12,7 +12,7 @@ class UserService {
    async create(req,_id){
     return new Promise(async(resolve,reject)=>{
         try{
-        // let {photourl}=req.body
+        // this sentence is changed by yash dhimmar
         let data = await User.find({_id:_id})
         if(data){
             let insert = await User.create({image:req.file.filename})
